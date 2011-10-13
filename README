@@ -1,3 +1,11 @@
+This repository is an import of Oniguruma 5.9.2 with modifications made in MRI
+1.9.2 to support transcoding and modifications made in Rubinius to support
+generational GC-friendly allocation.
+
+The Oniguruma project website is http://www.geocities.jp/kosako3/oniguruma/
+
+---
+
 README  2007/05/31
 
 Oniguruma  ----   (C) K.Kosako <sndgk393 AT ybb DOT ne DOT jp>
