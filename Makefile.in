@@ -40,8 +40,8 @@ subdir = .
 DIST_COMMON = README $(am__configure_deps) $(include_HEADERS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/config.h.in $(srcdir)/onig-config.in \
-	$(top_srcdir)/configure AUTHORS COPYING INSTALL config.guess \
-	config.sub depcomp install-sh ltmain.sh missing
+	$(top_srcdir)/configure AUTHORS COPYING INSTALL compile \
+	config.guess config.sub depcomp install-sh ltmain.sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -250,7 +250,7 @@ libname = libonig.la
 #AM_CFLAGS = -DNOT_RUBY
 AM_CFLAGS = 
 INCLUDES = -I$(top_srcdir) -I$(includedir)
-SUBDIRS = . sample
+SUBDIRS = .
 include_HEADERS = oniguruma.h oniggnu.h onigposix.h
 lib_LTLIBRARIES = $(libname)
 libonig_la_SOURCES = regint.h regparse.h regenc.h st.h \
