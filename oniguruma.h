@@ -36,6 +36,8 @@ extern "C" {
 #endif
 #endif
 
+#include <stddef.h>
+
 #define ONIGURUMA
 #define ONIGURUMA_VERSION_MAJOR   5
 #define ONIGURUMA_VERSION_MINOR   9
@@ -176,8 +178,78 @@ typedef struct OnigEncodingTypeST {
 typedef OnigEncodingType* OnigEncoding;
 
 ONIG_EXTERN OnigEncodingType OnigEncodingASCII;
+ONIG_EXTERN OnigEncodingType OnigEncodingBIG5;
+ONIG_EXTERN OnigEncodingType OnigEncodingBIG5_HKSCS;
+ONIG_EXTERN OnigEncodingType OnigEncodingBIG5_UAO;
+ONIG_EXTERN OnigEncodingType OnigEncodingCP949;
+ONIG_EXTERN OnigEncodingType OnigEncodingEmacs_Mule;
+ONIG_EXTERN OnigEncodingType OnigEncodingEUC_JP;
+ONIG_EXTERN OnigEncodingType OnigEncodingEUC_KR;
+ONIG_EXTERN OnigEncodingType OnigEncodingEUC_TW;
+ONIG_EXTERN OnigEncodingType OnigEncodingGB18030;
+ONIG_EXTERN OnigEncodingType OnigEncodingGBK;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_1;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_10;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_11;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_13;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_14;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_15;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_16;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_2;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_3;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_4;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_5;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_6;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_7;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_8;
+ONIG_EXTERN OnigEncodingType OnigEncodingISO_8859_9;
+ONIG_EXTERN OnigEncodingType OnigEncodingKOI8_R;
+ONIG_EXTERN OnigEncodingType OnigEncodingKOI8_U;
+ONIG_EXTERN OnigEncodingType OnigEncodingShift_JIS;
+ONIG_EXTERN OnigEncodingType OnigEncodingUS_ASCII;
+ONIG_EXTERN OnigEncodingType OnigEncodingUTF_16BE;
+ONIG_EXTERN OnigEncodingType OnigEncodingUTF_16LE;
+ONIG_EXTERN OnigEncodingType OnigEncodingUTF_32BE;
+ONIG_EXTERN OnigEncodingType OnigEncodingUTF_32LE;
+ONIG_EXTERN OnigEncodingType OnigEncodingUTF_8;
+ONIG_EXTERN OnigEncodingType OnigEncodingWindows_1251;
 
-#define ONIG_ENCODING_ASCII        (&OnigEncodingASCII)
+#define ONIG_ENCODING_ASCII         (&OnigEncodingASCII)
+#define ONIG_ENCODING_BIG5          (&OnigEncodingBIG5)
+#define ONIG_ENCODING_BIG5_HKSCS    (&OnigEncodingBIG5_HKSCS)
+#define ONIG_ENCODING_BIG5_UAO      (&OnigEncodingBIG5_UAO)
+#define ONIG_ENCODING_CP949         (&OnigEncodingCP949)
+#define ONIG_ENCODING_Emacs_Mule    (&OnigEncodingEmacs_Mule)
+#define ONIG_ENCODING_EUC_JP        (&OnigEncodingEUC_JP)
+#define ONIG_ENCODING_EUC_KR        (&OnigEncodingEUC_KR)
+#define ONIG_ENCODING_EUC_TW        (&OnigEncodingEUC_TW)
+#define ONIG_ENCODING_GB18030       (&OnigEncodingGB18030)
+#define ONIG_ENCODING_GBK           (&OnigEncodingGBK)
+#define ONIG_ENCODING_ISO_8859_1    (&OnigEncodingISO_8859_1)
+#define ONIG_ENCODING_ISO_8859_2    (&OnigEncodingISO_8859_2)
+#define ONIG_ENCODING_ISO_8859_3    (&OnigEncodingISO_8859_3)
+#define ONIG_ENCODING_ISO_8859_4    (&OnigEncodingISO_8859_4)
+#define ONIG_ENCODING_ISO_8859_5    (&OnigEncodingISO_8859_5)
+#define ONIG_ENCODING_ISO_8859_6    (&OnigEncodingISO_8859_6)
+#define ONIG_ENCODING_ISO_8859_7    (&OnigEncodingISO_8859_7)
+#define ONIG_ENCODING_ISO_8859_8    (&OnigEncodingISO_8859_8)
+#define ONIG_ENCODING_ISO_8859_9    (&OnigEncodingISO_8859_9)
+#define ONIG_ENCODING_ISO_8859_10   (&OnigEncodingISO_8859_10)
+#define ONIG_ENCODING_ISO_8859_11   (&OnigEncodingISO_8859_11)
+#define ONIG_ENCODING_ISO_8859_13   (&OnigEncodingISO_8859_13)
+#define ONIG_ENCODING_ISO_8859_14   (&OnigEncodingISO_8859_14)
+#define ONIG_ENCODING_ISO_8859_15   (&OnigEncodingISO_8859_15)
+#define ONIG_ENCODING_ISO_8859_16   (&OnigEncodingISO_8859_16)
+#define ONIG_ENCODING_KOI8_R        (&OnigEncodingKOI8_R)
+#define ONIG_ENCODING_KOI8_U        (&OnigEncodingKOI8_U)
+#define ONIG_ENCODING_Shift_JIS     (&OnigEncodingShift_JIS)
+#define ONIG_ENCODING_US_ASCII      (&OnigEncodingUS_ASCII)
+#define ONIG_ENCODING_UTF_16BE      (&OnigEncodingUTF_16BE)
+#define ONIG_ENCODING_UTF_16LE      (&OnigEncodingUTF_16LE)
+#define ONIG_ENCODING_UTF_32BE      (&OnigEncodingUTF_32BE)
+#define ONIG_ENCODING_UTF_32LE      (&OnigEncodingUTF_32LE)
+#define ONIG_ENCODING_UTF_8         (&OnigEncodingUTF_8)
+#define ONIG_ENCODING_Windows_1251  (&OnigEncodingWindows_1251)
 
 #define ONIG_ENCODING_UNDEF    ((OnigEncoding )0)
 

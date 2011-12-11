@@ -307,7 +307,7 @@ strcat_capa_from_static(UChar* dest, UChar* dest_end,
 
 #ifdef USE_ST_LIBRARY
 
-#include "ruby/st.h"
+#include "st.h"
 
 typedef struct {
   const UChar* s;
