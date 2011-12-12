@@ -28,6 +28,8 @@
  * SUCH DAMAGE.
  */
 
+#include <stdarg.h>
+
 #include "regparse.h"
 
 #define WARN_BUFSIZE    256
@@ -2849,17 +2851,17 @@ void onig_vsnprintf_with_pattern(UChar buf[], int bufsize, OnigEncoding enc,
 static void
 onig_syntax_warn(ScanEnv *env, const char *fmt, ...)
 {
-    va_list args;
-    UChar buf[WARN_BUFSIZE];
-    va_start(args, fmt);
-    onig_vsnprintf_with_pattern(buf, WARN_BUFSIZE, env->enc,
-		env->pattern, env->pattern_end,
-		(const UChar *)fmt, args);
-    va_end(args);
-    if (env->sourcefile == NULL)
-      rb_warn("%s", (char *)buf);
-    else
-      rb_compile_warn(env->sourcefile, env->sourceline, "%s", (char *)buf);
+    // va_list args;
+    // UChar buf[WARN_BUFSIZE];
+    // va_start(args, fmt);
+    // onig_vsnprintf_with_pattern(buf, WARN_BUFSIZE, env->enc,
+		// env->pattern, env->pattern_end,
+		// (const UChar *)fmt, args);
+    // va_end(args);
+    // if (env->sourcefile == NULL)
+    //   rb_warn("%s", (char *)buf);
+    // else
+    //   rb_compile_warn(env->sourcefile, env->sourceline, "%s", (char *)buf);
 }
 
 static void
@@ -2886,13 +2888,13 @@ CLOSE_BRACKET_WITHOUT_ESC_WARN(ScanEnv* env, UChar* c)
 static void
 CC_DUP_WARN(ScanEnv *env)
 {
-  if (onig_warn == onig_null_warn || !RTEST(ruby_verbose)) return ;
+  // if (onig_warn == onig_null_warn || !RTEST(ruby_verbose)) return ;
 
-  if (IS_SYNTAX_BV((env)->syntax, ONIG_SYN_WARN_CC_DUP) &&
-    !((env)->warnings_flag & ONIG_SYN_WARN_CC_DUP)) {
-    (env)->warnings_flag |= ONIG_SYN_WARN_CC_DUP;
-    onig_syntax_warn(env, "character class has duplicated range");
-  }
+  // if (IS_SYNTAX_BV((env)->syntax, ONIG_SYN_WARN_CC_DUP) &&
+  //   !((env)->warnings_flag & ONIG_SYN_WARN_CC_DUP)) {
+  //   (env)->warnings_flag |= ONIG_SYN_WARN_CC_DUP;
+  //   onig_syntax_warn(env, "character class has duplicated range");
+  // }
 }
 
 static void

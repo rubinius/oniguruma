@@ -113,9 +113,6 @@
 #define xfree       free
 #endif
 
-#ifdef RUBY
-
-#define CHECK_INTERRUPT_IN_MATCH_AT rb_thread_check_ints()
 #define onig_st_init_table                  st_init_table
 #define onig_st_init_table_with_size        st_init_table_with_size
 #define onig_st_init_numtable               st_init_numtable
@@ -136,31 +133,8 @@
 #define onig_st_is_member                   st_is_member
 
 #define USE_UPPER_CASE_TABLE
-#else
-
-#define st_init_table                  onig_st_init_table
-#define st_init_table_with_size        onig_st_init_table_with_size
-#define st_init_numtable               onig_st_init_numtable
-#define st_init_numtable_with_size     onig_st_init_numtable_with_size
-#define st_init_strtable               onig_st_init_strtable
-#define st_init_strtable_with_size     onig_st_init_strtable_with_size
-#define st_delete                      onig_st_delete
-#define st_delete_safe                 onig_st_delete_safe
-#define st_insert                      onig_st_insert
-#define st_lookup                      onig_st_lookup
-#define st_foreach                     onig_st_foreach
-#define st_add_direct                  onig_st_add_direct
-#define st_free_table                  onig_st_free_table
-#define st_cleanup_safe                onig_st_cleanup_safe
-#define st_copy                        onig_st_copy
-#define st_nothing_key_clone           onig_st_nothing_key_clone
-#define st_nothing_key_free            onig_st_nothing_key_free
-/* */
-#define onig_st_is_member              st_is_member
 
 #define CHECK_INTERRUPT_IN_MATCH_AT
-
-#endif
 
 #define STATE_CHECK_STRING_THRESHOLD_LEN             7
 #define STATE_CHECK_BUFF_MAX_SIZE               0x4000

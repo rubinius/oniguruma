@@ -27,6 +27,8 @@
  * SUCH DAMAGE.
  */
 
+#include <ctype.h>
+
 #include "regint.h"
 
 #define ONIGENC_IS_UNICODE_ISO_8859_1_CTYPE(code,ctype) \
@@ -2099,7 +2101,7 @@ onigenc_unicode_property_name_to_ctype(OnigEncoding enc, UChar* name, UChar* end
     if (code >= 0x80)
       return ONIGERR_INVALID_CHAR_PROPERTY_NAME;
 
-    buf[len++] = (UChar )TOLOWER((unsigned char)code);
+    buf[len++] = (UChar )tolower((int)code);
     if (len >= PROPERTY_NAME_MAX_SIZE)
       return ONIGERR_INVALID_CHAR_PROPERTY_NAME;
   }

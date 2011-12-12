@@ -27,6 +27,8 @@
  * SUCH DAMAGE.
  */
 
+#include <strings.h>
+
 #include "regint.h"
 
 OnigEncoding OnigEncDefaultCharEncoding = ONIG_ENCODING_INIT_DEFAULT;
@@ -631,8 +633,9 @@ onigenc_single_byte_code_to_mbclen(OnigCodePoint code ARG_UNUSED, OnigEncoding e
 extern int
 onigenc_single_byte_code_to_mbc(OnigCodePoint code, UChar *buf, OnigEncoding enc ARG_UNUSED)
 {
-  if (code > 0xff)
-      rb_raise(rb_eRangeError, "%u out of char range", code);
+  // Really MRI, really?
+  // if (code > 0xff)
+  //     rb_raise(rb_eRangeError, "%u out of char range", code);
   *buf = (UChar )(code & 0xff);
   return 1;
 }
@@ -811,7 +814,7 @@ onigenc_minimum_property_name_to_ctype(OnigEncoding enc, UChar* p, UChar* end)
   len = onigenc_strlen(enc, p, end);
   for (pbe = (pb = PBS) + sizeof(PBS)/sizeof(PBS[0]); pb < pbe; ++pb) {
     if (len == pb->len &&
-        STRNCASECMP((char *)p, (char *)pb->name, len) == 0)
+        strncasecmp((char *)p, (char *)pb->name, len) == 0)
       return pb->ctype;
   }
 
