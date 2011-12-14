@@ -336,7 +336,7 @@ OnigEncodingDefine(big5_hkscs, BIG5_HKSCS) = {
   big5_is_allowed_reverse_match,
   0
 };
-ENC_DEFINE("Big5-HKSCS", "BIG5_HKSCS")
+ENC_DEFINE("Big5-HKSCS", BIG5_HKSCS)
 ENC_ALIAS("Big5-HKSCS:2008", "Big5-HKSCS")
 
 /*
@@ -370,4 +370,4 @@ OnigEncodingDefine(big5_uao, BIG5_UAO) = {
   big5_is_allowed_reverse_match,
   0
 };
-ENC_DEFINE("Big5-UAO", "BIG5_UAO")
+ENC_DEFINE("Big5-UAO", BIG5_UAO)

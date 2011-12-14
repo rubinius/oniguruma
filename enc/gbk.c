@@ -213,7 +213,7 @@ OnigEncodingDefine(gbk, GBK) = {
   gbk_is_allowed_reverse_match,
   0
 };
-ENC_DEFINE("GBK", "GBK")
+ENC_DEFINE("GBK", GBK)
 /*
  * Name: GBK
  * MIBenum: 113

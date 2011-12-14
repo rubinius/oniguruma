@@ -376,7 +376,7 @@ OnigEncodingDefine(shift_jis, Shift_JIS) = {
   is_allowed_reverse_match,
   0
 };
-ENC_DEFINE("Shift_JIS", "Shift_JIS")
+ENC_DEFINE("Shift_JIS", Shift_JIS)
 /*
  * Name: Shift_JIS
  * MIBenum: 17
