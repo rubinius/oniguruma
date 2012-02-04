@@ -203,6 +203,7 @@ target_alias = @target_alias@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 encdir = $(top_srcdir)/enc
+transdir = $(encdir)/trans
 sampledir = $(top_srcdir)/sample
 libname = libonig.a
 
@@ -245,6 +246,63 @@ EXTRA_DIST = HISTORY README.ja index.html index_ja.html \
 	$(sampledir)/syntax.c
 
 bin_SCRIPTS = onig-config
+TRANSCSRCS = $(transdir)/big5.c \
+  $(transdir)/chinese.c \
+  $(transdir)/emoji.c \
+  $(transdir)/emoji_iso2022_kddi.c \
+  $(transdir)/emoji_sjis_docomo.c \
+  $(transdir)/emoji_sjis_kddi.c \
+  $(transdir)/emoji_sjis_softbank.c \
+  $(transdir)/escape.c \
+  $(transdir)/gb18030.c \
+  $(transdir)/gbk.c \
+  $(transdir)/iso2022.c \
+  $(transdir)/japanese.c \
+  $(transdir)/japanese_euc.c \
+  $(transdir)/japanese_sjis.c \
+  $(transdir)/korean.c \
+  $(transdir)/single_byte.c \
+  $(transdir)/utf8_mac.c \
+  $(transdir)/utf_16_32.c
+
+TRANSOBJS = $(transdir)/big5.$(OBJEXT) \
+  $(transdir)/chinese.$(OBJEXT) \
+  $(transdir)/emoji.$(OBJEXT) \
+  $(transdir)/emoji_iso2022_kddi.$(OBJEXT) \
+  $(transdir)/emoji_sjis_docomo.$(OBJEXT) \
+  $(transdir)/emoji_sjis_kddi.$(OBJEXT) \
+  $(transdir)/emoji_sjis_softbank.$(OBJEXT) \
+  $(transdir)/escape.$(OBJEXT) \
+  $(transdir)/gb18030.$(OBJEXT) \
+  $(transdir)/gbk.$(OBJEXT) \
+  $(transdir)/iso2022.$(OBJEXT) \
+  $(transdir)/japanese.$(OBJEXT) \
+  $(transdir)/japanese_euc.$(OBJEXT) \
+  $(transdir)/japanese_sjis.$(OBJEXT) \
+  $(transdir)/korean.$(OBJEXT) \
+  $(transdir)/single_byte.$(OBJEXT) \
+  $(transdir)/utf8_mac.$(OBJEXT) \
+  $(transdir)/utf_16_32.$(OBJEXT)
+
+TRANSSOS = $(transdir)/big5.$(DLEXT) \
+  $(transdir)/chinese.$(DLEXT) \
+  $(transdir)/emoji.$(DLEXT) \
+  $(transdir)/emoji_iso2022_kddi.$(DLEXT) \
+  $(transdir)/emoji_sjis_docomo.$(DLEXT) \
+  $(transdir)/emoji_sjis_kddi.$(DLEXT) \
+  $(transdir)/emoji_sjis_softbank.$(DLEXT) \
+  $(transdir)/escape.$(DLEXT) \
+  $(transdir)/gb18030.$(DLEXT) \
+  $(transdir)/gbk.$(DLEXT) \
+  $(transdir)/iso2022.$(DLEXT) \
+  $(transdir)/japanese.$(DLEXT) \
+  $(transdir)/japanese_euc.$(DLEXT) \
+  $(transdir)/japanese_sjis.$(DLEXT) \
+  $(transdir)/korean.$(DLEXT) \
+  $(transdir)/single_byte.$(DLEXT) \
+  $(transdir)/utf8_mac.$(DLEXT) \
+  $(transdir)/utf_16_32.$(DLEXT)
+
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 
@@ -1315,6 +1373,8 @@ uninstall-am: uninstall-binSCRIPTS uninstall-includeHEADERS \
 	uninstall-binSCRIPTS uninstall-includeHEADERS \
 	uninstall-libLIBRARIES
 
+
+all: $(lib_LIBRARIES) $(TRANSSOS)
 
 onig-config: onig-config.in
 
