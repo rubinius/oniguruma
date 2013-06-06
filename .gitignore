@@ -1,0 +1,7 @@
+*.a
+*~
+*.bundle
+*.so
+*.o
+*.dylib
+*.data
