@@ -237,27 +237,41 @@ onig_region_resize(OnigRegion* region, int n)
       return ONIGERR_MEMORY;
     }
 
+    region->malloced = 1;
     region->allocated = n;
   }
   else if (region->allocated < n) {
     OnigPosition *tmp;
 
     region->allocated = 0;
-    tmp = (OnigPosition* )xrealloc(region->beg, n * sizeof(OnigPosition));
-    if (tmp == 0) {
-      xfree(region->beg);
-      xfree(region->end);
-      return ONIGERR_MEMORY;
+
+    if (region->malloced) {
+      tmp = (OnigPosition* )xrealloc(region->beg, n * sizeof(OnigPosition));
+      if (tmp == 0) {
+        xfree(region->beg);
+        xfree(region->end);
+        return ONIGERR_MEMORY;
+      }
+    } else {
+      tmp = (OnigPosition* )xmalloc(n * sizeof(OnigPosition));
     }
     region->beg = tmp;
-    tmp = (OnigPosition* )xrealloc(region->end, n * sizeof(OnigPosition));
-    if (tmp == 0) {
-      xfree(region->beg);
-      xfree(region->end);
-      return ONIGERR_MEMORY;
+
+    if (region->malloced) {
+      tmp = (OnigPosition* )xrealloc(region->end, n * sizeof(OnigPosition));
+      if (tmp == 0) {
+        xfree(region->beg);
+        return ONIGERR_MEMORY;
+      }
+    } else {
+      tmp = (OnigPosition* )xmalloc(n * sizeof(OnigPosition));
     }
     region->end = tmp;
 
+    if (region->beg == 0 || region->end == 0)
+      return ONIGERR_MEMORY;
+
+    region->malloced = 1;
     region->allocated = n;
   }
 
@@ -298,6 +312,7 @@ onig_region_init(OnigRegion* region)
   region->beg          = (OnigPosition* )0;
   region->end          = (OnigPosition* )0;
   region->history_root = (OnigCaptureTreeNode* )0;
+  region->malloced     = 0;
 }
 
 extern OnigRegion*
@@ -316,8 +331,11 @@ onig_region_free(OnigRegion* r, int free_self)
 {
   if (r) {
     if (r->allocated > 0) {
-      if (r->beg) xfree(r->beg);
-      if (r->end) xfree(r->end);
+      if (r->malloced) {
+        if (r->beg) xfree(r->beg);
+        if (r->end) xfree(r->end);
+        r->malloced = 0;
+      }
       r->allocated = 0;
     }
 #ifdef USE_CAPTURE_HISTORY
