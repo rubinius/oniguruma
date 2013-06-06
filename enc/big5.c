@@ -300,9 +300,9 @@ OnigEncodingDefine(big5, BIG5) = {
   onigenc_not_support_get_ctype_code_range,
   big5_left_adjust_char_head,
   big5_is_allowed_reverse_match,
-  0
+  0,
+  ONIGENC_FLAG_NONE,
 };
-ENC_DEFINE("Big5", BIG5)
 
 /*
  * Name: CP950
@@ -334,9 +334,9 @@ OnigEncodingDefine(big5_hkscs, BIG5_HKSCS) = {
   onigenc_not_support_get_ctype_code_range,
   big5_left_adjust_char_head,
   big5_is_allowed_reverse_match,
-  0
+  0,
+  ONIGENC_FLAG_NONE,
 };
-ENC_DEFINE("Big5-HKSCS", BIG5_HKSCS)
 ENC_ALIAS("Big5-HKSCS:2008", "Big5-HKSCS")
 
 /*
@@ -368,6 +368,6 @@ OnigEncodingDefine(big5_uao, BIG5_UAO) = {
   onigenc_not_support_get_ctype_code_range,
   big5_left_adjust_char_head,
   big5_is_allowed_reverse_match,
-  0
+  0,
+  ONIGENC_FLAG_NONE,
 };
-ENC_DEFINE("Big5-UAO", BIG5_UAO)

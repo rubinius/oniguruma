@@ -25,9 +25,9 @@ OnigEncodingDefine(us_ascii, US_ASCII) = {
   onigenc_not_support_get_ctype_code_range,
   onigenc_single_byte_left_adjust_char_head,
   onigenc_always_true_is_allowed_reverse_match,
-  0
+  0,
+  ONIGENC_FLAG_NONE,
 };
-ENC_DEFINE("US-ASCII", US_ASCII)
 ENC_ALIAS("ASCII", "US-ASCII")
 ENC_ALIAS("ANSI_X3.4-1968", "US-ASCII")
 ENC_ALIAS("646", "US-ASCII")
