@@ -597,6 +597,7 @@ OnigEncodingDefine(shift_jis, Shift_JIS) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("Shift_JIS", Shift_JIS)
 /*
  * Name: Shift_JIS
  * MIBenum: 17

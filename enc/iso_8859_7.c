@@ -226,6 +226,7 @@ OnigEncodingDefine(iso_8859_7, ISO_8859_7) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("ISO-8859-7", ISO_8859_7)
 ENC_ALIAS("ISO8859-7", "ISO-8859-7")
 
 /*

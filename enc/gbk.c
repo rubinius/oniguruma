@@ -214,6 +214,7 @@ OnigEncodingDefine(gbk, GBK) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("GBK", GBK)
 /*
  * Name: GBK
  * MIBenum: 113

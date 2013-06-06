@@ -189,4 +189,5 @@ OnigEncodingDefine(utf_32le, UTF_32LE) = {
   0,
   ONIGENC_FLAG_UNICODE,
 };
+ENC_DEFINE("UTF-32LE", UTF_32LE)
 ENC_ALIAS("UCS-4LE", "UTF-32LE")

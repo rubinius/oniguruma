@@ -224,4 +224,5 @@ OnigEncodingDefine(euc_tw, EUC_TW) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("EUC-TW", EUC_TW)
 ENC_ALIAS("eucTW", "EUC-TW")

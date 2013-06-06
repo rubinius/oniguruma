@@ -442,6 +442,7 @@ OnigEncodingDefine(utf_8, UTF_8) = {
   0,
   ONIGENC_FLAG_UNICODE,
 };
+ENC_DEFINE("UTF-8", UTF_8)
 ENC_ALIAS("CP65001", "UTF-8")
 
 /*

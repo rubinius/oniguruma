@@ -221,3 +221,4 @@ OnigEncodingDefine(koi8_u, KOI8_U) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("KOI8-U", KOI8_U)

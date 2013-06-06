@@ -608,6 +608,7 @@ OnigEncodingDefine(euc_jp, EUC_JP) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("EUC-JP", EUC_JP)
 /*
  * Name: EUC-JP
  * MIBenum: 18

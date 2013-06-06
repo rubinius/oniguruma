@@ -191,4 +191,5 @@ OnigEncodingDefine(euc_kr, EUC_KR) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("EUC-KR", EUC_KR)
 ENC_ALIAS("eucKR", "EUC-KR")

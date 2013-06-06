@@ -308,6 +308,7 @@ OnigEncodingDefine(big5, BIG5) = {
  * Name: CP950
  * Source: http://msdn.microsoft.com/en-us/goglobal/cc305155.aspx
  */
+ENC_DEFINE("Big5", BIG5)
 ENC_REPLICATE("CP950", "Big5")
 
 /*
@@ -337,6 +338,7 @@ OnigEncodingDefine(big5_hkscs, BIG5_HKSCS) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("Big5-HKSCS", BIG5_HKSCS)
 ENC_ALIAS("Big5-HKSCS:2008", "Big5-HKSCS")
 
 /*
@@ -371,3 +373,4 @@ OnigEncodingDefine(big5_uao, BIG5_UAO) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("Big5-UAO", BIG5_UAO)

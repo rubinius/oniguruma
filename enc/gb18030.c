@@ -600,4 +600,4 @@ OnigEncodingDefine(gb18030, GB18030) = {
   0,
   ONIGENC_FLAG_NONE,
 };
-
+ENC_DEFINE("GB18030", GB18030)

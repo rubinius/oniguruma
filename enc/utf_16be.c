@@ -253,4 +253,5 @@ OnigEncodingDefine(utf_16be, UTF_16BE) = {
   0,
   ONIGENC_FLAG_UNICODE,
 };
+ENC_DEFINE("UTF-16BE", UTF_16BE)
 ENC_ALIAS("UCS-2BE", "UTF-16BE")

@@ -337,5 +337,5 @@ OnigEncodingDefine(emacs_mule, Emacs_Mule) = {
   0,
   ONIGENC_FLAG_NONE,
 };
-
+ENC_DEFINE("Emacs-Mule", Emacs_Mule)
 ENC_REPLICATE("stateless-ISO-2022-JP", "Emacs-Mule")

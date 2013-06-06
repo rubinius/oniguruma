@@ -217,5 +217,6 @@ OnigEncodingDefine(koi8_r, KOI8_R) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("KOI8-R", KOI8_R)
 ENC_ALIAS("CP878", "KOI8-R")
 

@@ -51,6 +51,7 @@ OnigEncodingDefine(windows_31j, Windows_31J) = {
   0,
   ONIGENC_FLAG_NONE,
 };
+ENC_DEFINE("Windows-31J", Windows_31J)
 /*
  * Name: Windows-31J
  * MIBenum: 2024
