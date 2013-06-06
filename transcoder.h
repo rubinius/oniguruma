@@ -21,6 +21,9 @@ extern "C" {
 #endif
 
 #include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
+#include <inttypes.h>
 
 #define WORDINDEX_SHIFT_BITS 2
 #define WORDINDEX2INFO(widx)      ((widx) << WORDINDEX_SHIFT_BITS)
@@ -75,6 +78,48 @@ extern "C" {
 #define TWOTRAIL       /* legal but undefined if two more trailing UTF-8 */
 #define THREETRAIL     /* legal but undefined if three more trailing UTF-8 */
 
+#define ECONV_ERROR_HANDLER_MASK                0x000000ff
+
+#define ECONV_INVALID_MASK                      0x0000000f
+#define ECONV_INVALID_REPLACE                   0x00000002
+
+#define ECONV_UNDEF_MASK                        0x000000f0
+#define ECONV_UNDEF_REPLACE                     0x00000020
+#define ECONV_UNDEF_HEX_CHARREF                 0x00000030
+
+#define ECONV_DECORATOR_MASK                    0x0000ff00
+#define ECONV_NEWLINE_DECORATOR_MASK            0x00003f00
+#define ECONV_NEWLINE_DECORATOR_READ_MASK       0x00000f00
+#define ECONV_NEWLINE_DECORATOR_WRITE_MASK      0x00003000
+
+#define ECONV_UNIVERSAL_NEWLINE_DECORATOR       0x00000100
+#define ECONV_CRLF_NEWLINE_DECORATOR            0x00001000
+#define ECONV_CR_NEWLINE_DECORATOR              0x00002000
+#define ECONV_XML_TEXT_DECORATOR                0x00004000
+#define ECONV_XML_ATTR_CONTENT_DECORATOR        0x00008000
+
+#define ECONV_STATEFUL_DECORATOR_MASK           0x00f00000
+#define ECONV_XML_ATTR_QUOTE_DECORATOR          0x00100000
+
+#if defined(_WIN32)
+#define ECONV_DEFAULT_NEWLINE_DECORATOR CONVERTER_CRLF_NEWLINE_DECORATOR
+#else
+#define ECONV_DEFAULT_NEWLINE_DECORATOR 0
+#endif
+
+#define ECONV_PARTIAL_INPUT                     0x00010000
+#define ECONV_AFTER_OUTPUT                      0x00020000
+
+typedef enum {
+  econv_invalid_byte_sequence,
+  econv_undefined_conversion,
+  econv_destination_buffer_full,
+  econv_source_buffer_empty,
+  econv_finished,
+  econv_after_output,
+  econv_incomplete_input
+} rb_econv_result_t;
+
 typedef enum {
   asciicompat_converter,        /* ASCII-compatible -> ASCII-compatible */
   asciicompat_decoder,          /* ASCII-incompatible -> ASCII-compatible */
@@ -109,14 +154,95 @@ struct rb_transcoder {
     ssize_t (*func_sio)(void*, const unsigned char*, size_t, unsigned int, unsigned char*, size_t); /* start -> output */
 };
 
+// TODO: remove
+#ifndef VALUE
+typedef intptr_t VALUE;
+#endif
+
+typedef struct {
+    struct rb_transcoding *tc;
+    unsigned char *out_buf_start;
+    unsigned char *out_data_start;
+    unsigned char *out_data_end;
+    unsigned char *out_buf_end;
+    rb_econv_result_t last_result;
+} rb_econv_elem_t;
+
+typedef struct {
+  const char* destination_encoding_name;
+  int num_transcoders;
+  struct rb_transcoder** transcoders;
+} rb_econv_replacement_converters;
+
+struct rb_econv_t {
+    int flags;
+    const char *source_encoding_name;
+    const char *destination_encoding_name;
+
+    int started;
+
+    const unsigned char *replacement_str;
+    size_t replacement_len;
+    const char *replacement_enc;
+    int replacement_allocated;
+
+    int num_replacement_converters;
+    rb_econv_replacement_converters* replacement_converters;
+
+    unsigned char *in_buf_start;
+    unsigned char *in_data_start;
+    unsigned char *in_data_end;
+    unsigned char *in_buf_end;
+    rb_econv_elem_t *elems;
+    int num_allocated;
+    int num_trans;
+    int num_finished;
+    struct rb_transcoding *last_tc;
+
+    /* last error */
+    struct {
+        rb_econv_result_t result;
+        struct rb_transcoding *error_tc;
+        const char *source_encoding;
+        const char *destination_encoding;
+        const unsigned char *error_bytes_start;
+        size_t error_bytes_len;
+        size_t readagain_len;
+    } last_error;
+};
+
+typedef struct rb_econv_t rb_econv_t;
 typedef struct rb_transcoder rb_transcoder;
 typedef struct rb_transcoder OnigTranscodingType;
 
 void rb_declare_transcoder(const char *enc1, const char *enc2, const char *lib);
 void rb_register_transcoder(const rb_transcoder *);
 
+rb_econv_t* rb_econv_alloc(int n_hint);
+void rb_econv_alloc_replacement_converters(rb_econv_t* ec, int num);
+void rb_econv_free(rb_econv_t *ec);
+
+rb_econv_result_t econv_convert(rb_econv_t *ec,
+                                const unsigned char **input_ptr,
+                                const unsigned char *input_stop,
+                                unsigned char **output_ptr,
+                                unsigned char *output_stop,
+                                int flags);
+
+int rb_econv_add_transcoder_at(rb_econv_t *ec, const rb_transcoder *tr, int i);
+
 #if defined __GNUC__ && __GNUC__ >= 4
 #pragma GCC visibility pop
+#endif
+
+/*
+ * To get rid of collision of initializer symbols in statically-linked encodings
+ * and transcoders
+ */
+#if defined(EXTSTATIC) && EXTSTATIC
+# define TRANS_INIT(name) void Init_trans_ ## name(void)
+#else
+# define TRANS_INIT(name) void Init_ ## name(void)
 #endif
 
 #ifdef __cplusplus

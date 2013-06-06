@@ -30,15 +30,11 @@
  * SUCH DAMAGE.
  */
 #ifndef REGINT_H
-#ifndef RUBY_EXTERN
-#include "ruby/config.h"
-#include "ruby/defines.h"
-#endif
 #ifdef ONIG_ESCAPE_UCHAR_COLLISION
 #undef ONIG_ESCAPE_UCHAR_COLLISION
 #endif
 #endif
-#include "ruby/oniguruma.h"
+#include "oniguruma.h"
 
 #if defined __GNUC__ && __GNUC__ >= 4
 #pragma GCC visibility push(default)
@@ -223,5 +219,7 @@ extern int ONIG_ENC_REGISTER(const char *, OnigEncodingType*);
 #if defined __GNUC__ && __GNUC__ >= 4
 #pragma GCC visibility pop
 #endif
+
+#define ENC_DEFINE(name, data)
 
 #endif /* ONIGURUMA_REGENC_H */

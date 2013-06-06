@@ -30,6 +30,18 @@
  * SUCH DAMAGE.
  */
 
+#include "ruby/ruby.h"
+#undef RUBY
+#define USE_UPPER_CASE_TABLE
+
+#ifdef HAVE_STDARG_PROTOTYPES
+#include <stdarg.h>
+#define va_init_list(a,b) va_start(a,b)
+#else
+#include <varargs.h>
+#define va_init_list(a,b) va_start(a)
+#endif
+
 /* for debug */
 /* #define ONIG_DEBUG_PARSE_TREE */
 /* #define ONIG_DEBUG_COMPILE */
@@ -118,7 +130,7 @@
 
 #ifdef RUBY
 
-#define CHECK_INTERRUPT_IN_MATCH_AT rb_thread_check_ints()
+#define CHECK_INTERRUPT_IN_MATCH_AT
 #define onig_st_init_table                  st_init_table
 #define onig_st_init_table_with_size        st_init_table_with_size
 #define onig_st_init_numtable               st_init_numtable

@@ -317,7 +317,7 @@ strcat_capa_from_static(UChar* dest, UChar* dest_end,
 
 #ifdef USE_ST_LIBRARY
 
-#include "ruby/st.h"
+#include "st.h"
 
 typedef struct {
   const UChar* s;
@@ -2900,10 +2900,7 @@ onig_syntax_warn(ScanEnv *env, const char *fmt, ...)
 		env->pattern, env->pattern_end,
 		(const UChar *)fmt, args);
     va_end(args);
-    if (env->sourcefile == NULL)
-      rb_warn("%s", (char *)buf);
-    else
-      rb_compile_warn(env->sourcefile, env->sourceline, "%s", (char *)buf);
+    rb_warn("%s", (char *)buf);
 }
 
 static void
