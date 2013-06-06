@@ -3,7 +3,7 @@
 /* src="iso2022.trans", len=15902, checksum=37507 */
 
 #include "transcoder.h"
-
+#include "ruby/ruby.h"
 
 
 static const unsigned char
