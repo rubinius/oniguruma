@@ -1,4 +1,4 @@
-#include "transcode_data.h"
+#include "transcoder.h"
 
 <%
   gb2312_valid_byte_pattern = ValidEncoding('EUC-KR')

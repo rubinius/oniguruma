@@ -2,7 +2,7 @@
 /* src="transcode-tblgen.rb", len=28460, checksum=51276 */
 /* src="emoji_sjis_kddi.trans", len=1288, checksum=10008 */
 
-#include "transcode_data.h"
+#include "transcoder.h"
 
 
 

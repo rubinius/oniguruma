@@ -2,7 +2,7 @@
 /* src="transcode-tblgen.rb", len=28460, checksum=51276 */
 /* src="japanese_euc.trans", len=2311, checksum=36138 */
 
-#include "transcode_data.h"
+#include "transcoder.h"
 
 
 

@@ -1,4 +1,4 @@
-#include "transcode_data.h"
+#include "transcoder.h"
 
 <%
   transcode_tblgen "Shift_JIS", "UTF-8",

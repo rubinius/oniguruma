@@ -3,7 +3,7 @@
 /* src="emoji.trans", len=1009, checksum=14571 */
 /* src="emoji-exchange-tbl.rb", len=524703, checksum=40005 */
 
-#include "transcode_data.h"
+#include "transcoder.h"
 
 
 

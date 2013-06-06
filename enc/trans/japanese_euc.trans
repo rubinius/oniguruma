@@ -1,4 +1,4 @@
-#include "transcode_data.h"
+#include "transcoder.h"
 
 <%
   transcode_tblgen "EUC-JP", "UTF-8",
